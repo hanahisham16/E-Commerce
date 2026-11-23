@@ -85,8 +85,8 @@ export default function CheckoutPage() {
   const [cartData, setCartData] = useState<CartDataI | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [paymentMethod, setPaymentMethod] = useState<"cash" | "online">("cash");
-  const { setNoOfCartItems } = useContext(CartContext);
-  const router = useRouter();
+const cartContext = useContext(CartContext);
+const setNoOfCartItems = cartContext?.setNoOfCartItems;  const router = useRouter();
 
   const {
     handleSubmit,
@@ -210,9 +210,7 @@ export default function CheckoutPage() {
         onSubmit={handleSubmit(handleCheckout)}
         className="grid grid-cols-12 gap-6"
       >
-        {/* Shipping + payment */}
         <div className="col-span-12 space-y-6 lg:col-span-8">
-          {/* Shipping address */}
           <Card className="gap-0 overflow-hidden rounded-2xl py-0 shadow-sm">
             <div className={cardHeaderClasses}>
               <h2 className="flex items-center gap-2 text-lg font-bold">

@@ -15,6 +15,8 @@ import {
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
 
+
+
 export const NavMenu = (props: ComponentProps<typeof NavigationMenu>) => (
   <NavigationMenu className="mx-auto" {...props}>
     <NavigationMenuList className="data-[orientation=vertical]:-ms-2 data-[orientation=vertical]:flex-col data-[orientation=vertical]:items-start data-[orientation=vertical]:justify-start">
@@ -87,20 +89,26 @@ export const NavMenu = (props: ComponentProps<typeof NavigationMenu>) => (
 
 const ListItem = React.forwardRef<
   React.ElementRef<typeof Link>,
-  React.ComponentPropsWithoutRef<typeof Link> & { icon: LucideIcon }
->(({ className, title, children, ...props }, ref) => {
+  React.ComponentPropsWithoutRef<typeof Link> & { icon?: LucideIcon }
+>(({ className, title, children, icon: Icon, ...props }, ref) => {
   return (
     <li>
       <NavigationMenuLink asChild>
         <Link
           className={cn(
-            "select-none min-w-[250] flex-col items-start leading-none no-underline outline-hidden transition block px-4 py-2.5 text-gray-600 hover:text-emerald-600 hover:bg-[#dcfce7] ",
+            "select-none min-w-[250px] flex-col items-start leading-none no-underline outline-hidden transition block px-4 py-2.5 text-gray-600 hover:text-emerald-600 hover:bg-[#dcfce7]",
             className,
           )}
           ref={ref}
           {...props}
         >
-          <div className="font-medium leading-none">{title}</div>
+          <div className="flex items-center gap-2 font-medium leading-none">
+            {Icon && <Icon className="h-4 w-4 shrink-0" />}
+            <span>{title}</span>
+          </div>
+          {children && (
+            <p className="mt-1 text-xs text-gray-500 line-clamp-1">{children}</p>
+          )}
         </Link>
       </NavigationMenuLink>
     </li>

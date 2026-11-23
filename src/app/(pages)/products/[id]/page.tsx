@@ -23,7 +23,12 @@ import ProductSlider from "@/components/products/ProductSlider";
 import ProductPurchaseActions from "@/components/products/ProductPurchaseActions";
 import AddToWishlistDetailBtn from "@/components/products/AddToWishlistDetailBtn";
 
-export default async function page({ params }: Promise<{ id: string }>) {
+type ProductDetailsPageProps = {
+  params: Promise<{ id: string }>;
+};
+export default async function page({
+  params,
+}: ProductDetailsPageProps) {
   const { id } = await params;
   const response = await getProductDetails(id);
   const products: ProductDetailsI = response.data;

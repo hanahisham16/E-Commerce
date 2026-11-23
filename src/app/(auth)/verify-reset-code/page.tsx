@@ -1,8 +1,7 @@
-
 "use client";
 
+import { Suspense, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useState } from "react";
 import { toast } from "sonner";
 import {
   LoaderCircle,
@@ -12,7 +11,7 @@ import {
 import Link from "next/link";
 import { verifyResetCode } from "@/actions/forgetPassword.actions";
 
-export default function VerifyResetCode() {
+function VerifyResetCodeForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -124,5 +123,19 @@ export default function VerifyResetCode() {
         </Link>
       </div>
     </section>
+  );
+}
+
+export default function VerifyResetCode() {
+  return (
+    <Suspense
+      fallback={
+        <section className="flex min-h-[75vh] items-center justify-center bg-[#F8FAFC] px-4 py-10">
+          <LoaderCircle size={28} className="animate-spin text-green-600" />
+        </section>
+      }
+    >
+      <VerifyResetCodeForm />
+    </Suspense>
   );
 }

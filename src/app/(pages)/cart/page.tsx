@@ -202,7 +202,7 @@ export default function CartPage() {
         </div>
 
         {/* Order summary */}
-        <OrderSummary cartData={cartData!} />
+        <OrderSummary isCheckOut={false} cartData={cartData!} />
       </div>
     </div>
   );

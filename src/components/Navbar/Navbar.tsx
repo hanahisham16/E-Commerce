@@ -69,11 +69,9 @@ function IconifyIcon({
 }
 
 export default function Navbar() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { noOfCartItems } = useContext(CartContext)!;
   const { noOfWishlistItems } = useContext(WishlistContext)!;
   const session = useSession();
-  console.log(session);
 
   function signOutUser() {
     signOut({ redirect: true, callbackUrl: "/login" });
