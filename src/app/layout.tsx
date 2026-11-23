@@ -1,15 +1,21 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Exo } from "next/font/google";
 import "./globals.css";
+import { cn } from "@/lib/utils";
+import Navbar from "@/components/Navbar/Navbar";
+import Footer from "@/components/Footer/Footer";
+import { Toaster } from "sonner";
+import AuthContextProvider from "@/context/AuthContext";
+import CardContextProvider from "@/context/CartContext";
+import WishlistContextProvider, {
+  WishlistContext,
+} from "@/context/WishlistContext";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const exo = Exo({
   subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  display: "swap",
+  adjustFontFallback: false,
 });
 
 export const metadata: Metadata = {
@@ -19,11 +25,20 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html
-      lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
-    >
-      <body className="min-h-full flex flex-col">{children}</body>
+    <html lang="en" className={cn("h-full", "antialiased", exo.className)}>
+      <body className="min-h-full flex flex-col" suppressHydrationWarning>
+        <AuthContextProvider>
+          <WishlistContextProvider>
+            <CardContextProvider>
+              <Navbar />
+              <Toaster position="top-right" richColors />
+
+              {children}
+              <Footer />
+            </CardContextProvider>
+          </WishlistContextProvider>
+        </AuthContextProvider>
+      </body>
     </html>
   );
 }
