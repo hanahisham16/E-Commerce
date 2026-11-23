@@ -2,7 +2,8 @@ import { decode } from "next-auth/jwt";
 import { cookies } from "next/headers";
 
 export async function getOurToken() {
-  const token = (await cookies()).get("next-auth.session-token")?.value;
+  const cookie = await cookies()
+  const token = cookie.get("next-auth.session-token")?.value || cookie.get('__Secure-next-auth.session-token')?.value;
   if(!token){
     throw new Error("Please login to add product to your cart")
   }

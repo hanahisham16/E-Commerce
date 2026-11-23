@@ -193,12 +193,18 @@ export default function Navbar() {
                   {" "}
                   <div className="relative">
                     <Heart className="w-5 h-5 text-gray-500 group-hover:text-emerald-700 transition-colors" />
-                    <Badge
-                      className="absolute top-[-12] right-[-14]  text-sm p-1"
-                      variant="destructive"
-                    >
-                      {noOfWishlistItems}
-                    </Badge>
+                    {noOfWishlistItems ? (
+                      <>
+                        <Badge
+                          className="absolute top-[-12] right-[-14]  text-sm p-1"
+                          variant="destructive"
+                        >
+                          {noOfWishlistItems}
+                        </Badge>
+                      </>
+                    ) : (
+                      <></>
+                    )}
                   </div>
                 </Link>
 
@@ -207,14 +213,14 @@ export default function Navbar() {
                   href="/cart"
                 >
                   <div className="relative">
-                    {" "}
+                   
                     <ShoppingCart className="w-5 h-5 text-gray-500  group-hover:text-emerald-700 transition-colors" />
-                    <Badge
+                 {noOfCartItems ? <><Badge
                       className="absolute top-[-12] right-[-14]  text-sm p-1"
                       variant="default"
                     >
                       {noOfCartItems}
-                    </Badge>
+                    </Badge></> :<></>}   
                   </div>
                 </Link>
               </div>
@@ -260,7 +266,7 @@ export default function Navbar() {
                             <span className="font-medium">My Profile</span>
                           </DropdownMenuItem>
                         </Link>
-                        <Link href="/cart">
+                        <Link href="/allorders">
                           <DropdownMenuItem className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-gray-700 focus:bg-gray-100">
                             <Package className="h-4 w-4 text-gray-500" />
                             <span className="font-medium">My Orders</span>
